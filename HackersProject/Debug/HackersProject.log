@@ -1,0 +1,8 @@
+﻿  mapDriver.cpp
+F:\00TUTORING\VisualStudioC++14Nov2021\Matthew\HackersProject\Input.h(25,21): warning C4018: '<': signed/unsigned mismatch
+F:\00TUTORING\VisualStudioC++14Nov2021\Matthew\HackersProject\Input.h(37,21): warning C4018: '<': signed/unsigned mismatch
+F:\00TUTORING\VisualStudioC++14Nov2021\Matthew\HackersProject\mapDriver.cpp(141,19): warning C4244: 'initializing': conversion from 'time_t' to 'unsigned int', possible loss of data
+F:\00TUTORING\VisualStudioC++14Nov2021\Matthew\HackersProject\mapDriver.cpp(236,19): warning C4244: 'initializing': conversion from 'time_t' to 'unsigned int', possible loss of data
+F:\00TUTORING\VisualStudioC++14Nov2021\Matthew\HackersProject\mapDriver.cpp(360,19): warning C4244: 'initializing': conversion from 'time_t' to 'unsigned int', possible loss of data
+F:\00TUTORING\VisualStudioC++14Nov2021\Matthew\HackersProject\mapDriver.cpp(136): warning C4715: 'mapDriver::serverRoomRoutine': not all control paths return a value
+  HackersProject.vcxproj -> F:\00TUTORING\VisualStudioC++14Nov2021\Matthew\HackersProject\Debug\HackersProject.exe

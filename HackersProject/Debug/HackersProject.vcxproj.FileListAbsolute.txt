@@ -1,0 +1,2 @@
+F:\00TUTORING\VisualStudioC++14Nov2021\Matthew\HackersProject\Debug\HackersProject.exe
+F:\00TUTORING\VisualStudioC++14Nov2021\Matthew\HackersProject\Debug\HackersProject.pdb

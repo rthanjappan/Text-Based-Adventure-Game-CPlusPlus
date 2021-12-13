@@ -1,0 +1,325 @@
+#include "Map.h"
+#include "mapDriver.h"
+#include <cstdlib>
+#include <ctime>
+#include "Player.h"
+#include "Game.h"
+using namespace std;
+
+
+class CTPartsBuyProcess
+{
+public:
+    void cTPartsBuyMainMenu(void);
+    //RestaurantDemo  rD1;
+private:
+    int iChoice;
+    int CTPartsprices[7] = { 10,20,5,15,5,10,100 };
+
+    void showCTPartsBuyMenu(void);
+    void enterCTPartsBuyChoice(void);
+    void makeCTPartsBuySelection(void);
+    bool isAffordable(int price);
+};
+int mapDriver::serverRoomRoutine(Player &player,string roomName) {
+   // this->player = player;
+    Map map;  // create object called map of type Map
+    /*map.spawnBestBuy(1, 3);
+    map.spawnNPC(2, 5);
+    map.spawnNPC(3, 8);
+    map.spawnHacker(1, 1);*/
+    //get the system time
+    unsigned seed = time(0);
+    //seed the ramdom number generator
+    srand(seed);
+    const int MIN_ROW_VALUE = 0;
+    const int MAX_ROW_VALUE = 4;
+    const int MIN_COL_VALUE = 0;
+    const int MAX_COL_VALUE = 8;
+
+    int bbRow=(rand() % (MAX_ROW_VALUE - MIN_ROW_VALUE + 1)) + MIN_ROW_VALUE;
+    int bbCol = (rand() % (MAX_COL_VALUE - MIN_COL_VALUE + 1)) + MIN_COL_VALUE;
+    map.spawnBestBuy(bbRow, bbCol);
+    //map.spawnBestBuy(1, 3);
+    /*map.spawnNPC(2, 5);
+    map.spawnNPC(3, 8);
+    map.spawnHacker(1, 1);*/
+    int npc1Row = (rand() % (MAX_ROW_VALUE - MIN_ROW_VALUE + 1)) + MIN_ROW_VALUE;
+    int npc1Col = (rand() % (MAX_COL_VALUE - MIN_COL_VALUE + 1)) + MIN_COL_VALUE;
+    map.spawnNPC(npc1Row, npc1Col);
+    int npc2Row = (rand() % (MAX_ROW_VALUE - MIN_ROW_VALUE + 1)) + MIN_ROW_VALUE;
+    int npc2Col = (rand() % (MAX_COL_VALUE - MIN_COL_VALUE + 1)) + MIN_COL_VALUE;
+    map.spawnNPC(npc2Row, npc2Col);
+ 
+    int hack1Row = (rand() % (MAX_ROW_VALUE - MIN_ROW_VALUE + 1)) + MIN_ROW_VALUE;
+    int hack1Col = (rand() % (MAX_COL_VALUE - MIN_COL_VALUE + 1)) + MIN_COL_VALUE;
+    map.spawnHacker(hack1Row, hack1Col);
+    char move;  // for storing user input
+    cout << "You are at " << roomName<<"." << endl;
+    // quit after 10 moves
+    //for (int i = 0; i < 10; i++) {
+    while (!bEndFlag)
+    {
+
+    
+        map.displayMap();  // pretty print map_data in terminal
+
+        cout << "Valid moves are: " << endl;
+        map.displayMoves();  // give user a menu of valid moves to pick from
+
+        cout << "Input a move: ";
+        cin >> move;
+        cout << endl;
+        if (move == 'q') {
+            quitRoutine();
+            if (bEndFlag) {
+                return 0;
+            }
+        }
+        if (move == 'n') {
+            return 2;
+        }
+        map.executeMove(move);  // move the player on map based on user input
+
+        if (map.isBestBuyLocation()) {
+            cout << "You're in a Best Buy!" << endl;
+            bestBuyRoutine();
+        }
+
+        if (map.isHackerLocation()) {
+            cout << "You've encountered a Hacker!" << endl;
+            hackerRoutine();
+        }
+
+        if (map.isNPCLocation()) {
+            cout << "You've encountered an NPC!" << endl;
+            npcRoutine();
+        }
+    }
+}
+class BestBuyProcess
+{
+public:
+    void mainMenu(void);
+    //RestaurantDemo  rD1;
+private:
+    int iChoice;
+
+    void showBestBuyMenu(void);
+    void enterBestBuyChoice(void);
+    void makeBestBuySelection(void);
+};
+int mapDriver::bestBuyRoutine() {
+    
+    for (auto s : map.input.getBestBuyInfo()) {
+        cout << s << endl;
+    }
+    BestBuyProcess bestBuyProcess;
+    bestBuyProcess.mainMenu();
+
+    
+    return 0;
+    
+
+
+
+};
+int mapDriver::hackerRoutine() {
+    return 0;
+
+};
+int mapDriver::npcRoutine() {
+
+    return 0;
+};
+
+//processing the Best Buy main menu
+void BestBuyProcess::mainMenu(void)
+{
+    showBestBuyMenu();
+    enterBestBuyChoice();
+    while (iChoice != 6)
+    {
+        makeBestBuySelection();
+        showBestBuyMenu();
+        enterBestBuyChoice();
+    }
+    /*rD1.eoj();*/
+    return;
+}
+//showing the Best Buy menu
+void BestBuyProcess::showBestBuyMenu(void)
+{
+    //system("cls");
+    cout << "\n\t         Welcome to Best Buy";
+    cout << "\n\n\t          Best Buy Menu";
+    cout << "\n\n\t          Select one:";
+    cout << "\n\n\t          1. Computer Parts";
+    cout << "\n\n\t          2. Antivirus Software";
+    cout << "\n\n\t          3. Virtual Private Network(VPN)";
+    cout << "\n\n\t          4. Internet Provider";
+    cout << "\n\n\t          5. -------";
+    cout << "\n\n\t          6. exit";
+    cout << "\n\n\t          Enter choice (1 - 6) ===> ";
+    
+    return;
+}
+//reading the Best Buy menuchoice
+void BestBuyProcess::enterBestBuyChoice(void)
+{
+    //iChoice =Scanner::getIntValue();
+    cin >> iChoice;
+    while (iChoice < 1 || iChoice > 6)
+    {
+        cout << "\nERROR...re-enter choice (1 - 6) ===> ";
+        //iChoice =Scanner::getIntValue();
+        cin >> iChoice;
+    }
+    return;
+};
+//selecting the corresponding program according to users choice
+void BestBuyProcess::makeBestBuySelection(void)
+{
+    CTPartsBuyProcess ctPartsBuy;
+    // Clear Screen before printing Headings
+   // system("cls");
+    switch (iChoice)
+    {
+    case 1: 
+        
+        ctPartsBuy.cTPartsBuyMainMenu();
+        break;
+    }
+}
+
+
+void CTPartsBuyProcess::cTPartsBuyMainMenu(void) {
+
+    showCTPartsBuyMenu();
+    enterCTPartsBuyChoice();
+    while (iChoice != 8)
+    {
+        makeCTPartsBuySelection();
+        showCTPartsBuyMenu();
+        enterCTPartsBuyChoice();
+    }
+    /*rD1.eoj();*/
+    return;
+
+};
+void CTPartsBuyProcess::showCTPartsBuyMenu(void) {
+    //system("cls");
+    cout << "\n\t         Welcome to Best Buy";
+    cout << "\n\n\t          Computer Parts Menu";
+    cout << "\n\n\t          Select one:";
+    cout << "\n\n\t          1. A CPU costs 10 Dogecoins";
+    cout << "\n\n\t          2. A GPU costs 20 Dogecoins";
+    cout << "\n\n\t          3. A Power Supply Unit costs 5 Dogecoins";
+    cout << "\n\n\t          4. A Computer Case costs 15 Dogecoins";
+    cout << "\n\n\t          5.  An internet card costs 5 Dogecoins";
+    cout << "\n\n\t          6.  A keyboard and mouse costs 10 Dogecoins";
+    cout << "\n\n\t          7.  A premade computer costs 100 Dogecoins";
+    cout << "\n\n\t         8. exit";
+    cout << "\n\n\t          Enter choice (1 - 8) ===> ";
+   /* A CPU costs 10 Dogecoins
+        A GPU costs 20 Dogecoins
+        A Power Supply Unit costs 5 Dogecoins
+        A Computer Case costs 15 Dogecoins
+        An internet card costs 5 Dogecoins
+        A keyboard and mouse costs 10 Dogecoins
+        A premade computer costs 100 Dogecoins*/
+    return;
+
+};
+void CTPartsBuyProcess::enterCTPartsBuyChoice(void) {
+    cin >> iChoice;
+    while (iChoice < 1 || iChoice > 8)
+    {
+        cout << "\nERROR...re-enter choice (1 - 8) ===> ";
+        //iChoice =Scanner::getIntValue();
+        cin >> iChoice;
+    }
+    return;
+};
+void CTPartsBuyProcess::makeCTPartsBuySelection(void) {
+    // Clear Screen before printing Headings
+      // system("cls");
+    if (!isAffordable(CTPartsprices[iChoice-1])) {
+        cout << "You don't have enough money to buy this item.\n" <<
+            "Please select another item."<<endl;
+        return;
+    }
+    switch (iChoice)
+    {
+    case 1:
+
+       
+        playerObj.addItemToInventory("CPU");
+        playerObj.setDogeCoins(playerObj.getDogeCoins() - 10);
+        cout << playerObj;
+        break;
+    case 2:
+        playerObj.addItemToInventory("GPU");
+        playerObj.setDogeCoins(playerObj.getDogeCoins() - 20);
+        cout << playerObj;
+        break;
+    case 3:
+
+        playerObj.addItemToInventory("Power Supply Unit");
+        playerObj.setDogeCoins(playerObj.getDogeCoins() - 5);
+        cout << playerObj;
+        break;
+    case 4:
+        playerObj.addItemToInventory("Computer Case");
+        playerObj.setDogeCoins(playerObj.getDogeCoins() - 15);
+        cout << playerObj;
+        break;
+    case 5:
+
+        playerObj.addItemToInventory("Internet card");
+        playerObj.setDogeCoins(playerObj.getDogeCoins() - 5);
+        cout << playerObj;
+        break;
+    case 6:
+        playerObj.addItemToInventory("Keyboard and mouse");
+        playerObj.setDogeCoins(playerObj.getDogeCoins() - 10);
+        cout << playerObj;
+        break;
+    case 7:
+
+        playerObj.addItemToInventory("Premade computer");
+        playerObj.setDogeCoins(playerObj.getDogeCoins() - 100);
+        cout << playerObj;
+        break;
+   
+
+    default:
+        break;
+
+    }
+
+};
+bool CTPartsBuyProcess::isAffordable(int price) {
+
+    if (playerObj.getDogeCoins() > price) {
+        return true;
+    }
+    return false;
+}
+void mapDriver::quitRoutine() {
+	cout << "Do you want to quit (y/n) ? ";
+	char cChoice;
+	cin >> cChoice;
+	if (tolower(cChoice) == 'y') {
+		bEndFlag = true;
+		//exit(0);
+	}
+	else {
+		return;
+	}
+}
+void mapDriver::eoj() {
+    cout << "Game is ending..."<<endl;
+        system("pause");
+    cout<<"Thanks for playing...." << endl;
+}

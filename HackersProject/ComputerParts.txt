@@ -1,0 +1,8 @@
+A CPU costs 10 Dogecoins
+A GPU costs 20 Dogecoins
+A Power Supply Unit costs 5 Dogecoins
+A Computer Case costs 15 Dogecoins
+An internet card costs 5 Dogecoins
+A keyboard and mouse costs 10 Dogecoins
+A premade computer costs 100 Dogecoins
+
